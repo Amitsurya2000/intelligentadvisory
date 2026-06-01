@@ -160,13 +160,12 @@ export function VideoReveal() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-    const init = { w: isMobile ? "55%" : "38%", mid: isMobile ? "72%" : "50%", end: isMobile ? "85%" : "60%" };
+    const init = { w: isMobile ? "70%" : "48%", mid: isMobile ? "82%" : "57%", end: isMobile ? "92%" : "64%" };
 
     // Reduced motion → present the final, balanced state with no scrubbing.
     if (reduced) {
       gsap.set(card, { width: init.end, scale: 1, rotateX: 0, borderRadius: 18 });
       gsap.set([particlesRef.current, beamsRef.current, glowRef.current], { opacity: 1 });
-      gsap.set(".vr-keyword", { opacity: 1, y: 0 });
       return;
     }
 
@@ -178,7 +177,6 @@ export function VideoReveal() {
       gsap.set(backdropRef.current, { opacity: 0 });
       gsap.set([particlesRef.current, beamsRef.current], { opacity: 0 });
       gsap.set(glowRef.current, { opacity: 0.25, scale: 0.9 });
-      gsap.set(".vr-keyword", { opacity: 0, y: 18 });
 
       const tl = gsap.timeline({
         defaults: { ease: "none" },
@@ -205,7 +203,6 @@ export function VideoReveal() {
         .to(glowRef.current, { opacity: 0.8, scale: 1.05, duration: 1 }, 1)
         .to(particlesRef.current, { opacity: 1, duration: 1 }, 1)
         .to(beamsRef.current, { opacity: 0.65, duration: 1 }, 1)
-        .to(".vr-keyword", { opacity: 1, y: 0, stagger: 0.18, duration: 0.8 }, 1.05)
 
         // PHASE 3 — final, balanced size (NOT fullscreen)
         .to(card, { width: init.end, borderRadius: 18, ease: "power2.inOut", duration: 1 }, 2);
@@ -243,11 +240,13 @@ export function VideoReveal() {
           aria-hidden
         />
 
-        {/* Keywords — fade in around the video during the scroll reveal */}
+        {/* Keywords — visible only while the video is playing */}
         {KEYWORDS.map((k) => (
           <span
             key={k.text}
-            className={`vr-keyword pointer-events-none absolute z-30 hidden font-display text-lg font-semibold uppercase tracking-[0.2em] text-white/70 lg:block ${k.className}`}
+            className={`pointer-events-none absolute z-30 hidden font-display text-lg font-semibold uppercase tracking-[0.2em] text-white/70 transition-all duration-500 ease-out lg:block ${k.className} ${
+              playing ? "opacity-100 blur-0" : "opacity-0 blur-[2px]"
+            }`}
             aria-hidden
           >
             {k.text}
@@ -264,7 +263,7 @@ export function VideoReveal() {
             <div
               ref={cardRef}
               style={{ transformOrigin: "center center", transformStyle: "preserve-3d" }}
-              className="group glass-strong relative aspect-video max-h-[50vh] w-[38%] overflow-hidden rounded-[24px] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] ring-1 ring-white/10 will-change-transform"
+              className="group glass-strong relative aspect-video max-h-[56vh] w-[48%] overflow-hidden rounded-[24px] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] ring-1 ring-white/10 will-change-transform"
             >
               <video
                 ref={videoRef}
