@@ -162,9 +162,9 @@ export function VideoReveal() {
 
     const init = { w: isMobile ? "86%" : "80%", mid: isMobile ? "92%" : "90%", end: isMobile ? "96%" : "95%" };
 
-    // Reduced motion → present the final, balanced state with no scrubbing.
-    if (reduced) {
-      gsap.set(card, { width: init.end, scale: 1, rotateX: 0, borderRadius: 18 });
+    // Mobile or reduced motion → simple inline card, no pin / scrub (tight spacing).
+    if (reduced || isMobile) {
+      gsap.set(card, { width: isMobile ? "92%" : init.end, scale: 1, rotateX: 0, borderRadius: 18 });
       gsap.set([particlesRef.current, beamsRef.current, glowRef.current], { opacity: 1 });
       return;
     }
@@ -212,11 +212,11 @@ export function VideoReveal() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="video" className="relative h-[115vh] md:h-[160vh]">
+    <section ref={sectionRef} id="video" className="relative md:h-[160vh]">
       {/* Pinned stage */}
       <div
         ref={pinRef}
-        className="sticky top-0 grid h-[46vh] place-items-center overflow-hidden md:h-[70vh]"
+        className="relative grid place-items-center overflow-hidden py-6 md:sticky md:top-0 md:h-[70vh] md:py-0"
         style={{ perspective: 1200 }}
       >
         {/* Darken backdrop (Phase 1) */}
