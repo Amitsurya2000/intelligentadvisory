@@ -10,8 +10,9 @@ export const siteConfig = {
   tagline: "Growth-Obsessed AI Agency",
   description:
     "We engineer intelligent growth systems for ambitious brands. Media Buying + AI + Funnels = Unstoppable Growth.",
-  // Primary conversion target. Swap for the real Calendly/Cal.com link.
-  bookingUrl: "https://cal.com/intelligent-advisory/strategy-call",
+  // Primary conversion target — your live site. Swap for a dedicated
+  // Calendly/Cal.com scheduling link or WhatsApp when you have one.
+  bookingUrl: "https://intelligentadvisory.in/",
   demoUrl: "#process",
   email: "rajan@intelligentadvisory.in",
   social: {
