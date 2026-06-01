@@ -160,7 +160,7 @@ export function VideoReveal() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-    const init = { w: isMobile ? "70%" : "60%", mid: isMobile ? "82%" : "70%", end: isMobile ? "94%" : "80%" };
+    const init = { w: isMobile ? "86%" : "80%", mid: isMobile ? "92%" : "90%", end: isMobile ? "96%" : "95%" };
 
     // Reduced motion → present the final, balanced state with no scrubbing.
     if (reduced) {
@@ -263,7 +263,7 @@ export function VideoReveal() {
             <div
               ref={cardRef}
               style={{ transformOrigin: "center center", transformStyle: "preserve-3d" }}
-              className="group glass-strong relative aspect-video max-h-[64vh] w-[60%] overflow-hidden rounded-[24px] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] ring-1 ring-white/10 will-change-transform"
+              className="group glass-strong relative aspect-video max-h-[70vh] w-[80%] overflow-hidden rounded-[24px] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] ring-1 ring-white/10 will-change-transform"
             >
               <video
                 ref={videoRef}

@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/sections/hero";
 import { VideoReveal } from "@/components/sections/video-reveal";
+import { HeroActions } from "@/components/sections/hero-actions";
 import { PressLogos } from "@/components/sections/press-logos";
 import { TrustMetrics } from "@/components/sections/trust-metrics";
 import { BusinessProblems } from "@/components/sections/business-problems";
@@ -20,6 +21,7 @@ export default function Home() {
     <>
       <HeroSection />
       <VideoReveal />
+      <HeroActions />
       <PressLogos />
       <TrustMetrics />
       <BusinessProblems />

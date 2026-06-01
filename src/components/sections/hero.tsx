@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Play, Star, ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site";
-import { Button } from "@/components/ui/button";
-import { Magnetic } from "@/components/shared/magnetic-button";
 
 /* -------------------------------------------------------------------------- */
 /*  Hero background video. Plays public/hero-workforce.mp4 full-bleed. If the    */
@@ -190,65 +188,7 @@ export function HeroSection() {
             being a gamble and finally becomes predictable.
           </motion.p>
 
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.85, duration: 0.6, ease: "easeOut" }}
-            className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-center"
-          >
-            <Magnetic>
-              <Button asChild size="lg">
-                <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer">
-                  <Sparkles />
-                  Scale My Brand Now
-                </a>
-              </Button>
-            </Magnetic>
-            <Magnetic strength={0.25}>
-              <Button asChild size="lg" variant="secondary">
-                <a href={siteConfig.demoUrl}>
-                  <Play />
-                  See How It Works
-                </a>
-              </Button>
-            </Magnetic>
-          </motion.div>
-
-          {/* Trust row */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6, ease: "easeOut" }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-3"
-          >
-            <ul className="flex -space-x-3" aria-hidden="true">
-              {["AI", "ML", "NB", "VC", "ML"].map((m, i) => (
-                <li
-                  key={i}
-                  className={cn(
-                    "grid size-9 place-items-center rounded-full border border-white/20 font-mono text-xs font-semibold text-brand-ink ring-2 ring-brand-ink",
-                    i % 3 === 0 && "bg-brand-cyan",
-                    i % 3 === 1 && "bg-brand-violet",
-                    i % 3 === 2 && "bg-brand-fuchsia"
-                  )}
-                >
-                  {m}
-                </li>
-              ))}
-            </ul>
-            <div className="flex flex-col gap-1">
-              <span className="flex items-center gap-1" aria-label="Rated 5 out of 5 stars">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="size-4 fill-brand-cyan text-brand-cyan" />
-                ))}
-              </span>
-              <span className="text-sm text-zinc-300">
-                <span className="font-semibold text-white">4.8/5</span> from 7,554 reviews ·
-                500+ brands scaled
-              </span>
-            </div>
-          </motion.div>
+          {/* CTAs + reviews now live in <HeroActions /> — placed after the video */}
         </div>
       </div>
 
