@@ -133,17 +133,17 @@ export function HeroSection() {
       {/* Hero background video — the only hero animation */}
       <HeroWorkforceVideo />
 
-      {/* Darken the footage so the headline dominates (animation stays subtle) */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-brand-ink/55" />
+      {/* Light scrim — keep the background animation clearly visible while a
+          soft vignette + bottom gradient keep the centered headline readable. */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-brand-ink/25" />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_65%_65%_at_50%_50%,rgba(5,6,12,0.55),transparent_80%)]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_55%_at_50%_50%,rgba(5,6,12,0.4),transparent_75%)]"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-brand-ink via-brand-ink/35 to-brand-ink/70"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-brand-ink via-transparent to-brand-ink/40"
       />
-      <div className="bg-grid pointer-events-none absolute inset-0 -z-10 opacity-15" aria-hidden="true" />
 
       {/* ------------------------------- Content ------------------------------- */}
       <div className="mx-auto w-full max-w-7xl px-6 py-24">
