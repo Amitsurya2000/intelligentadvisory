@@ -212,11 +212,11 @@ export function VideoReveal() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="video" className="relative h-[150vh] md:h-[220vh]">
+    <section ref={sectionRef} id="video" className="relative h-[115vh] md:h-[160vh]">
       {/* Pinned stage */}
       <div
         ref={pinRef}
-        className="sticky top-0 grid h-[64vh] place-items-center overflow-hidden md:h-[78vh]"
+        className="sticky top-0 grid h-[46vh] place-items-center overflow-hidden md:h-[70vh]"
         style={{ perspective: 1200 }}
       >
         {/* Darken backdrop (Phase 1) */}
