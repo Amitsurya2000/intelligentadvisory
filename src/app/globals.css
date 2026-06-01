@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark-first brand system (values are HSL channels for shadcn tokens). */
+    --background: 230 35% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 230 30% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --primary: 187 92% 53%; /* electric cyan */
+    --primary-foreground: 230 35% 6%;
+
+    --secondary: 230 20% 16%; /* neutral dark surface */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 230 20% 14%;
+    --muted-foreground: 216 18% 72%;
+
+    --accent: 187 92% 53%; /* electric cyan */
+    --accent-foreground: 230 35% 6%;
+
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 187 92% 53%;
+
+    --radius: 1rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-color: hsl(var(--background));
+    overflow-x: hidden;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  /* Typographic readability defaults (components can still override via utilities). */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    text-wrap: balance; /* no orphan words / ragged headline lines */
+    letter-spacing: -0.02em;
+  }
+
+  p,
+  li,
+  blockquote {
+    text-wrap: pretty; /* avoids single-word last lines (widows) */
+  }
+
+  ::selection {
+    background: rgba(34, 211, 238, 0.3);
+    color: #fff;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #05060c;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #22d3ee, #8b5cf6);
+    border-radius: 999px;
+  }
+}
+
+@layer components {
+  /* Glassmorphism surface — the signature card treatment. */
+  .glass {
+    @apply border border-white/10 bg-white/[0.03] backdrop-blur-xl;
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.06),
+      0 20px 60px -20px rgba(0, 0, 0, 0.6);
+  }
+
+  .glass-strong {
+    @apply border border-white/15 bg-white/[0.06] backdrop-blur-2xl;
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      0 24px 80px -24px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Animated gradient border wrapper. Put content in a child with its own bg. */
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(120deg, #06b6d4, #22d3ee, #67e8f9);
+    background-size: 200% 200%;
+    @apply animate-border-flow;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(120deg, #a5f3fc 0%, #22d3ee 55%, #67e8f9 100%);
+  }
+
+  .gradient-text-animated {
+    @apply bg-clip-text text-transparent animate-gradient-pan;
+    background-image: linear-gradient(120deg, #22d3ee, #67e8f9, #a5f3fc, #22d3ee);
+    background-size: 200% auto;
+  }
+
+  /* Soft brand glow behind hero elements / orbs. */
+  .glow-cyan {
+    box-shadow: 0 0 60px -10px rgba(34, 211, 238, 0.5);
+  }
+  .glow-violet {
+    box-shadow: 0 0 60px -10px rgba(34, 211, 238, 0.5);
+  }
+
+  /* Section vertical rhythm. */
+  .section {
+    @apply relative py-24 md:py-32;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground backdrop-blur;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Background grid with a radial fade mask — used as section backdrop. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  }
+
+  /* Hide native scrollbar while keeping scroll behaviour (premium carousels). */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Respect reduced-motion preferences globally for premium-but-accessible UX. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

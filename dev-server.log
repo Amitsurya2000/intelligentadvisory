@@ -1,0 +1,24 @@
+
+> intelligent-advisory@1.0.0 dev
+> next dev
+
+   ▲ Next.js 15.5.18
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.162:3000
+   - Experiments (use with caution):
+     · optimizePackageImports
+
+ ✓ Starting...
+ ✓ Ready in 7.1s
+ ○ Compiling / ...
+ ✓ Compiled / in 7.7s (2567 modules)
+ GET / 200 in 9915ms
+ ✓ Compiled in 550ms (1229 modules)
+ GET / 200 in 1238ms
+ ✓ Compiled in 2.3s (2567 modules)
+ ✓ Compiled in 1421ms (2567 modules)
+ ✓ Compiled in 1101ms (2567 modules)
+ GET / 200 in 1494ms
+ GET / 200 in 896ms
+ ✓ Compiled in 5.7s (2567 modules)
+ GET / 200 in 2025ms
