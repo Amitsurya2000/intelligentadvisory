@@ -126,9 +126,9 @@
     box-shadow: 0 0 60px -10px rgba(34, 211, 238, 0.5);
   }
 
-  /* Section vertical rhythm. */
+  /* Section vertical rhythm — tighter so sections sit closer together. */
   .section {
-    @apply relative py-24 md:py-32;
+    @apply relative py-12 md:py-16;
   }
 
   .eyebrow {
