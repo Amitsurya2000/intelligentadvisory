@@ -18,6 +18,7 @@ import {
   TrendingUp,
   TrendingDown,
   ArrowRight,
+  ArrowDown,
   Sparkles,
   GripVertical,
 } from "lucide-react";
@@ -111,8 +112,8 @@ export function BusinessProblems() {
           description="Drag the AI pivot across each row to watch the heavy, manual reality dissolve into an autonomous, agent-driven operation."
         />
 
-        {/* Column labels */}
-        <Reveal className="mt-12">
+        {/* Desktop: draggable before/after comparison slider */}
+        <Reveal className="mt-12 hidden md:block">
           <div className="mb-3 flex items-center justify-between font-mono text-xs uppercase tracking-[0.2em]">
             <span className="flex items-center gap-2 text-rose-300/70">
               <span className="h-2 w-2 rounded-full bg-rose-400/60" /> Before · manual
@@ -206,6 +207,37 @@ export function BusinessProblems() {
           </div>
         </Reveal>
 
+        {/* Mobile: stacked before → after (no slider, full text always visible) */}
+        <div className="mt-10 space-y-4 md:hidden">
+          <div className="glass overflow-hidden rounded-3xl border border-rose-500/20">
+            <div className="flex items-center gap-2 border-b border-white/5 px-5 py-3 font-mono text-xs uppercase tracking-[0.2em] text-rose-300/70">
+              <span className="h-2 w-2 rounded-full bg-rose-400/60" /> Before · manual
+            </div>
+            <ul className="divide-y divide-white/5">
+              {beforeAfter.map((row, i) => (
+                <Row key={`mb-${i}`} side="before" data={row.before} index={i} mirror={false} />
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex justify-center">
+            <span className="glow-cyan grid size-9 place-items-center rounded-full border border-brand-cyan/40 bg-brand-ink text-brand-cyan">
+              <ArrowDown className="size-4" />
+            </span>
+          </div>
+
+          <div className="glass overflow-hidden rounded-3xl border border-brand-cyan/30">
+            <div className="flex items-center gap-2 border-b border-white/5 px-5 py-3 font-mono text-xs uppercase tracking-[0.2em] text-brand-cyan">
+              AI-powered · after <span className="glow-cyan h-2 w-2 rounded-full bg-brand-cyan" />
+            </div>
+            <ul className="divide-y divide-white/5">
+              {beforeAfter.map((row, i) => (
+                <Row key={`ma-${i}`} side="after" data={row.after} index={i} mirror={false} />
+              ))}
+            </ul>
+          </div>
+        </div>
+
         {/* CTA line */}
         <Reveal delay={0.15} className="mt-12 flex flex-col items-center gap-4 text-center">
           <p className="max-w-xl text-sm text-muted-foreground">
@@ -229,19 +261,21 @@ function Row({
   side,
   data,
   index,
+  mirror = true,
 }: {
   side: "before" | "after";
   data: { title: string; detail: string; icon: string };
   index: number;
+  mirror?: boolean;
 }) {
   const isAfter = side === "after";
   return (
     <li
       className={cn(
         "flex items-center gap-4 px-5 py-5 sm:px-7 sm:py-6",
-        // Mirror the AFTER rows to the right so their text sits where the
-        // slider reveals (the right side of the track).
-        isAfter && "flex-row-reverse text-right"
+        // Mirror the AFTER rows to the right (only in the desktop slider) so
+        // their text sits where the slider reveals.
+        isAfter && mirror && "flex-row-reverse text-right"
       )}
     >
       <div
